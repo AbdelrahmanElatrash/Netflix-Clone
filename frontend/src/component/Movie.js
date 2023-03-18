@@ -1,32 +1,41 @@
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import ModalMovie from './ModalMovie';
+import { useState } from 'react';
+
 
 function Movie(props) {
-    console.log(props.movie)
+
+    const [showModal,setShowModal]=useState(false)
+    
+    const openModal=()=>{
+        setShowModal(!showModal);
+
+    }
+
     return (
         <>
+            <Col>
+                <Card key={props.movie.id}>
 
-            <Row xs={1} md={2} lg={4}className="g-4">
-                {props.movie.map((item) => (
-                    <Col>
-                        <Card key={item.id}>
+                    <Card.Body>
+                        <Card.Title>{props.movie.title}</Card.Title>
+                        <Card.Img variant="top" src={props.movie.posterPath} />
+                        <Card.Text>
+                           <p>release date:{props.movie.release_date} </p>
+                           <p>overview : 
+                            {props.movie.overview}</p> 
                             
-                            <Card.Body>
-                                <Card.Title>{item.title}</Card.Title>
-                                <Card.Img variant="top" src={item.posterPath} />
-                                <Card.Text>
-                                release date:{item.release_date} <br></br>
-                                overview : <br></br>
-                                {item.overview}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
+                        </Card.Text>
+                        <Button variant="primary" onClick={openModal}>add to favorite</Button>
+                    </Card.Body>
+                </Card>
+                <ModalMovie showModal={showModal} openModal={openModal} movie={props.movie}/>
+            </Col>
 
-        </>
+            
+            </>
     )
 }
 export default Movie;

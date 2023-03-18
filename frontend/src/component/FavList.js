@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form'
+// import Form from 'react-bootstrap/Form'
 
 
 function FavList() {
@@ -45,7 +45,6 @@ function FavList() {
     const addCommint=(e)=>{
         setChangeCommit(!changeCommit)
         setComment(e.target.value)
-
     }
     // const updateCommint = (id,item) => {
         // const updateURL=`${serverURL}/movies/${id}`
@@ -80,7 +79,8 @@ function FavList() {
                             <Card.Text>
                                 release date:{item.release_date} <br/>
                                 overview : <br/>
-                                    {item.overview}
+                                    {item.overview}<br/>
+                                    {commint}
                                 
                                  {/* <Form.Group>
                                         {changeCommit

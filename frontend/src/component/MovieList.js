@@ -5,15 +5,15 @@ import Row from 'react-bootstrap/Row';
 function MovieList(props){
     console.log(props.data)
     return (
-        <>
+        
             
             <Row xs={1} md={2} lg={4} className="g-4">
                 {props.data.map((item) => {
-                    return <Movie movie={item} />
+                    return <Movie key={item.id} movie={item} />
                     
                  })} 
             </Row>
-        </>
+       
     )
 }
 

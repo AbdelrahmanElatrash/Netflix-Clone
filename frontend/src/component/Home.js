@@ -29,10 +29,9 @@ function Home() {
 
 
     return (
-        <>
+
            <MovieList data={data} />
-            
-        </>
+           
     )
 }
 export default Home;

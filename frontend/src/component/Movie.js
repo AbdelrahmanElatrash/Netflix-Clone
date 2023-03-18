@@ -15,18 +15,18 @@ function Movie(props) {
     }
 
     return (
-        <>
-            <Col>
+        
+            <Col key={props.movie.id}>
                 <Card key={props.movie.id}>
-
                     <Card.Body>
                         <Card.Title>{props.movie.title}</Card.Title>
                         <Card.Img variant="top" src={props.movie.posterPath} />
                         <Card.Text>
-                           <p>release date:{props.movie.release_date} </p>
-                           <p>overview : 
-                            {props.movie.overview}</p> 
                             
+                                release date: {props.movie.release_date} <br/>
+                                overview : <br /> {props.movie.overview} 
+                            
+                           
                         </Card.Text>
                         <Button variant="primary" onClick={openModal}>add to favorite</Button>
                     </Card.Body>
@@ -35,7 +35,7 @@ function Movie(props) {
             </Col>
 
             
-            </>
+            
     )
 }
 export default Movie;

@@ -1,30 +1,37 @@
 import { useState,useEffect } from 'react';
 import MovieList from './MovieList'
 
-const TRENDING_URL = process.env.TRENDING_URL || "http://localhost:5000/trending"
+
 
 function Home() {
+    const serverURL=process.env.REACT_APP_SERVER_URL
+    const TRENDING_URL = serverURL+"/trending" //|| "http://localhost:5000/trending"
     const [data, setData]=useState([]);
+
     const fetchData=()=>{
         fetch(TRENDING_URL)
             .then((res) => res.json())
             .then((data) => {
-                setData([data])
+                setData(data)
             })
             .catch((err) => {
                 console.log(err);
             });
+        
+
+        
     }
         
     useEffect(()=>{
-        fetchData();
-    }, [])     
+        fetchData() ;
+    },[])     
            
 
 
     return (
         <>
-            <MovieList movies={data} />
+           <MovieList data={data} />
+            
         </>
     )
 }

@@ -3,7 +3,8 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-// import Form from 'react-bootstrap/Form'
+import UpdateCommint from "./UpdateCommint";
+
 
 
 function FavList() {
@@ -36,42 +37,38 @@ function FavList() {
         fetch(deleteURL, { method: 'DELETE' })
             .then((res) => {
                 res.json()
+                alert('movie wase deleted')
             })
+            .catch((err)=>{
+                console.log(err);
+                alert('somtheng went wrong')
+            })
+            fetchData() ; 
     }
 // .............................................................................
 
-    const [commint, setComment] = useState('')
-    const [changeCommit,setChangeCommit]=useState(false)
-    const addCommint=(e)=>{
-        setChangeCommit(!changeCommit)
-        setComment(e.target.value)
+
+    const [showModal,setShowModal]=useState(false)
+    const [movieData, setMovieData] = useState({});
+    const openModal=(item)=>{
+        setShowModal(true);
+        setMovieData(item);
     }
-    // const updateCommint = (id,item) => {
-        // const updateURL=`${serverURL}/movies/${id}`
-        // const reqOption={
-        //     method : 'PUT',
-        //     headers : {'Content-Type':'application/json'},
-        //     body:JSON.stringify({
-        //                         overVewo:{overview:item.overview,commint:commint }
-        //     })
-        // }
-        // fetch(updateURL,reqOption)
-        //     .then(res=>res.json())
-        //     .then(data=>console.log(data))
-        //     .catch((err)=>{
-        //         console.log(err);
-        //     })
-    // }
-                 
+    
+    const closeModal = () =>{
+        setShowModal(false);
+    }
+    
 // ...............................................................   
     
 
     return (
 
         <Row xs={1} md={2} lg={4} className="g-4">
+
             {data.map((item) => (
                 <Col key={item.id}>
-                    <Card key={item.id}>
+                    <Card>
 
                         <Card.Body>
                             <Card.Title>{item.title}</Card.Title>
@@ -80,28 +77,20 @@ function FavList() {
                                 release date:{item.release_date} <br/>
                                 overview : <br/>
                                     {item.overview}<br/>
-                                    {commint}
-                                
-                                 {/* <Form.Group>
-                                        {changeCommit
-                                            ?<> <Form.Label>add you'r commint</Form.Label>  <Form.Control type='text' value={commint} onChange={addCommint} /> </>
-                                            : {commint}
-                                        }
-                                    </Form.Group> */}
-                               
-                                   
-                                    
-                             
+                                   commint: {item.commint}
                                 
                             </Card.Text>
-                            <Button variant="success" onClick={addCommint}>update commint</Button>{' '}
+                            
+                            <Button variant="success" onClick={()=>openModal(item)}>update commint</Button>{' '}
                             <Button variant="danger" onClick={() => deleteFromDB(item.id)}>delete</Button>
                         </Card.Body>
-
+                        
                     </Card>
-
+                    <UpdateCommint showModal={showModal} closeModal={closeModal} movie={movieData} fetchData={fetchData}/>
                 </Col>
+                
             ))}
+            
         </Row>
     )
 }

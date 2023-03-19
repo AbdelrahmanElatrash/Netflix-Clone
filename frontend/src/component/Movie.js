@@ -25,6 +25,7 @@ function Movie(props) {
                             
                                 release date: {props.movie.release_date} <br/>
                                 overview : <br /> {props.movie.overview} 
+                                
                             
                            
                         </Card.Text>

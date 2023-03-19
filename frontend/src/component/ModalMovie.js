@@ -17,7 +17,8 @@ function ModalMovie(props) {
                             title :movie.title ,
                             relaseDate:movie.release_date ,
                             posterPath:movie.posterPath,
-                            overVewo:{overview:movie.overview,commint:commint }
+                            overVewo:movie.overview,
+                            commint:commint 
         })
     }
 
@@ -25,19 +26,21 @@ function ModalMovie(props) {
         fetch(MOVIE_URL ,reqOption)
             .then(res=>res.json())
             .then((data)=>{
+                props.openModal()
+                alert('movie save in the favorite')
                 console.log(data)
 
             })
             .catch((err)=>{
                 console.log(err);
+                alert({err:"somtheng went wrong"})
             })
     }
     
     
     const addCommint=(e)=>{
         setComment(e.target.value)
-        // reqOption.body.overview.commint=e.target.value
-        // console.log(reqOption.body)
+        
 
     }
 
